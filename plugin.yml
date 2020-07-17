@@ -1,8 +1,0 @@
-name: BedWars
-version: 1.0
-api: 2.0.0
-main: bw\Main
-author: uSony
-commands:
-  bw:
-    description: Sistema de BedWars
