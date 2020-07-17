@@ -1,8 +1,8 @@
 <?php
 
-namespace Kai;
+namespace WEATHERCRAFTYT1;
 
-use Kai\GameSender;
+use WEATHERCRAFTYT1\GameSender;
 
 Class ResetMap
 {
