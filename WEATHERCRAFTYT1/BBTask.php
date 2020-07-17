@@ -1,6 +1,6 @@
 <?php
 
-namespace Kai;
+namespace WEATHERCRAFTYT1;
 
 use pocketmine\plugin\Plugin;
 use pocketmine\scheduler\Task;
