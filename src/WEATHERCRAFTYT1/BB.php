@@ -3,6 +3,8 @@
 namespace WEATHERCRAFTYT1;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TE;
 use pocketmine\utils\Config;
@@ -221,7 +223,17 @@ class BB extends PluginBase implements Listener {
         } else {
             $player->sendMessage($this->prefix . "You cannot join!");
         }
-
+        
+	public function onHit(EntityDamageByEntityEvent $event) {
+            if ($event->getEntity() instanceof EntityHuman) {
+                $player = $event->getDamager();
+                if ($player instanceof Player) {
+                    $event->setCancelled(true);
+                    $this->getGameParty($player);
+                }
+            }
+        }
+	
         public function Puntuar(PlayerItemHeldEvent $event) {
             $player = $event->getPlayer();
             $level = $player->getLevel()->getFolderName();
