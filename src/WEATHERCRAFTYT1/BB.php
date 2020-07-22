@@ -426,6 +426,7 @@ class BB extends PluginBase implements Listener {
                                                 goto sinslots;
                                                 with:
                                                 $slots->save();
+						$player->getInventory()->clearAll();
                                                 $player->sendMessage($this->prefix . "You Entered A BuildBattle Match");
                                                 foreach($level->getPlayers() as $playersinarena)
                                                 {
