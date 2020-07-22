@@ -8,6 +8,9 @@ commands:
     bb:
         usage: /bb <make>
         description: CreateGame
+    bbnpc:
+        usage: /bbnpc
+        description: AddsABuildBattleNPC
 permissions:
     bb.op:
         default: op
