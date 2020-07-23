@@ -1420,12 +1420,6 @@ class GameSender extends BBTask {
                                                                         $thesp = $limit->get($quien);
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. ">> ".TE::AQUA."BUILD BATTLE WINNERS!!! $arena ".TE::GREEN."($tema)");
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "1ST°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
-                                                                        unset($paints[$quien]);
-                                                                        $quien2 = array_search($val[1], $paints);
-                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::GRAY. "2ND°: ".TE::AQUA.$quien2." ".TE::GREEN.$val[1]);
-                                                                        unset($paints[$quien2]);
-                                                                        $quien3 = array_search($val[2], $paints);
-                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::GOLD. "3RD°: ".TE::AQUA.$quien3." ".TE::GREEN.$val[2]);
                                                                         foreach($playersArena as $pl) {
                                                                             $puntaje = $points->get($pl->getName());
                                                                             $tupos = 1 + array_search($puntaje, $val);
