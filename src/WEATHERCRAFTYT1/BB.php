@@ -220,7 +220,7 @@ class BB extends PluginBase implements Listener {
             $player->setFood(20);
             $player->setGamemode(1);
             sinslots:
-        } else {
+	}
             $player->sendMessage($this->prefix . "You cannot join!");
         }
         
