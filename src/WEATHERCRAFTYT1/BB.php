@@ -3,14 +3,11 @@
 namespace WEATHERCRAFTYT1;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TE;
 use pocketmine\utils\Config;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
-use WEATHERCRAFTYT1\{Entity\EntityManager, Entity\types\EntityHuman};
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
@@ -184,55 +181,6 @@ class BB extends PluginBase implements Listener {
                     }
                 }
                 $slots->save();
-            }
-        }
-        
-	public function getGameParty(Player $player) {
-	    $config = new Config($this->getDataFolder() . "/config.yml", Config::YAML);
-            $slots = new Config($this->getDataFolder() . "/slots.yml", Config::YAML);
-            $namemap = str_replace("§f", "", $text[2]);
-            $level = $this->getServer()->getLevelByName($namemap);
-            for ($i = 1; $i <= 16; $i++) {
-                if($slots->get("slot".$i.$namemap)==null)
-                {
-                        $thespawn = $config->get($namemap . "Spawn17");
-                        $slots->set("slot".$i.$namemap, $player->getName());
-                        goto with;
-                }
-            }
-            $player->sendMessage($this->prefix."No Slots");
-            goto sinslots;
-            with:
-            $slots->save();
-	    $player->getInventory()->clearAll();
-            $player->sendMessage($this->prefix . "You Entered A BuildBattle Match");
-            foreach($level->getPlayers() as $playersinarena)
-            {
-            $playersinarena->sendMessage($player->getNameTag() .TE::BLUE. " joined the game!");
-            }
-            $spawn = new Position($thespawn[0]+0.5,$thespawn[1],$thespawn[2]+0.5,$level);
-	    $level->loadChunk($spawn->getFloorX(), $spawn->getFloorZ());
-	    $player->teleport($spawn,0,0);
-            $player->getInventory()->clearAll();
-            $player->removeAllEffects();
-            $player->setMaxHealth(20);
-            $player->setHealth(20);
-            $player->setFood(20);
-            $player->setGamemode(1);
-            sinslots:
-	}
-	else
-	{
-            $player->sendMessage($this->prefix . "You cannot join!");
-        }
-        
-	public function onHit(EntityDamageByEntityEvent $event) {
-            if ($event->getEntity() instanceof EntityHuman) {
-                $player = $event->getDamager();
-                if ($player instanceof Player) {
-                    $event->setCancelled(true);
-                    $this->getGameParty($player);
-                }
             }
         }
 	
