@@ -1,16 +1,13 @@
 <?php
 
-namespace WEATHERCRAFTYT1;
+namespace Kai;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TE;
 use pocketmine\utils\Config;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
-use WEATHERCRAFTYT1\{Entity\EntityManager, Entity\types\EntityHuman};
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
@@ -24,7 +21,7 @@ use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\entity\EntityInventoryChangeEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
-use WEATHERCRAFTYT1\ResetMap;
+use Kai\ResetMap;
 use pocketmine\level\sound\PopSound;
 use pocketmine\level\sound\AnvilUseSound;
 use pocketmine\item\Item;
@@ -32,7 +29,7 @@ use pocketmine\event\entity\EntityLevelChangeEvent;
 
 class BB extends PluginBase implements Listener {
 
-        public $prefix = TE::GRAY . "[ " . TE::BLUE. TE::BOLD . "[Build" . TE::BLUE."Battle]". TE::RESET . TE::GRAY . " ]";
+        public $prefix = TE::GRAY . "[ " . TE::GREEN. TE::BOLD . "Build" . TE::LIGHT_PURPLE."Battle". TE::RESET . TE::GRAY . " ]";
 	public $mode = 0;
 	public $arenas = array();
 	public $currentLevel = "";
@@ -40,7 +37,7 @@ class BB extends PluginBase implements Listener {
 	
 	public function onEnable()
 	{
-		$this->getLogger()->notice(TE::AQUA . "BuildBattle by WEATHERCRAFTYT1 ;)");
+		$this->getLogger()->notice(TE::AQUA . "BuildBattle by FoxyDroiid");
                 $this->getServer()->getPluginManager()->registerEvents($this ,$this);
 		@mkdir($this->getDataFolder());
 		$config = new Config($this->getDataFolder() . "/config.yml", Config::YAML);
@@ -52,7 +49,7 @@ class BB extends PluginBase implements Listener {
 		{
 			$this->getServer()->loadLevel($lev);
 		}
-                $temas = array("Bird","Fish","Car","Dragon","Internet","Frog","Mario Bros","Dog","Mage","Tractor","Boat","WaterFall","Tiger","AirPlane","Superhero","Soccer","MCPE Mobs-Monsters","WC Server","Anything","Shark","Cereal","Car","Tornado","Planets","Landscape","Train","House","Sports");
+                $temas = array("Pájaro - Bird","Pez - Fish","Auto - Car","Dragón","Internet","Rana - Frog","Mario Bros","Perro - Dog","Mago - Mage","Tractor","Bote - Boat","Cascada - WaterFall","Tigre - Tiger","Avión - AirPlane","Superhéroe","Fútbol - Soccer","MCPE Mobs-Monsters");
 		if($config->get("temas")==null)
 		{
 			$config->set("temas",$temas);
@@ -77,7 +74,7 @@ class BB extends PluginBase implements Listener {
                         $slots->set("slot".$i.$arena, 0);
                     }
                     $slots->save();
-                    $config->set($arena . "Join", 0);
+                    $config->set($arena . "inicio", 0);
                     $config->save();
                     $points = new Config($this->getDataFolder() . "/puntos".$arena.".yml", Config::YAML);
                     foreach($points->getAll() as $key => $w){
@@ -187,53 +184,6 @@ class BB extends PluginBase implements Listener {
             }
         }
         
-	public function getGameParty(Player $player) {
-	    $config = new Config($this->getDataFolder() . "/config.yml", Config::YAML);
-            $slots = new Config($this->getDataFolder() . "/slots.yml", Config::YAML);
-            $namemap = str_replace("§f", "", $text[2]);
-            $level = $this->getServer()->getLevelByName($namemap);
-            for ($i = 1; $i <= 16; $i++) {
-                if($slots->get("slot".$i.$namemap)==null)
-                {
-                        $thespawn = $config->get($namemap . "Spawn17");
-                        $slots->set("slot".$i.$namemap, $player->getName());
-                        goto with;
-                }
-            }
-            $player->sendMessage($this->prefix."No Slots");
-            goto sinslots;
-            with:
-            $slots->save();
-	    $player->getInventory()->clearAll();
-            $player->sendMessage($this->prefix . "You Entered A BuildBattle Match");
-            foreach($level->getPlayers() as $playersinarena)
-            {
-            $playersinarena->sendMessage($player->getNameTag() .TE::BLUE. " joined the game!");
-            }
-            $spawn = new Position($thespawn[0]+0.5,$thespawn[1],$thespawn[2]+0.5,$level);
-	    $level->loadChunk($spawn->getFloorX(), $spawn->getFloorZ());
-	    $player->teleport($spawn,0,0);
-            $player->getInventory()->clearAll();
-            $player->removeAllEffects();
-            $player->setMaxHealth(20);
-            $player->setHealth(20);
-            $player->setFood(20);
-            $player->setGamemode(1);
-            sinslots:
-        } else {
-            $player->sendMessage($this->prefix . "You cannot join!");
-        }
-        
-	public function onHit(EntityDamageByEntityEvent $event) {
-            if ($event->getEntity() instanceof EntityHuman) {
-                $player = $event->getDamager();
-                if ($player instanceof Player) {
-                    $event->setCancelled(true);
-                    $this->getGameParty($player);
-                }
-            }
-        }
-	
         public function Puntuar(PlayerItemHeldEvent $event) {
             $player = $event->getPlayer();
             $level = $player->getLevel()->getFolderName();
@@ -247,32 +197,32 @@ class BB extends PluginBase implements Listener {
                     {
                         if($event->getItem()->getDamage()==14)
                         {
-                            $player->sendTip(TE::BOLD.TE::DARK_RED."SHAME TO MY EYES");
+                            $player->sendTip(TE::BOLD.TE::DARK_RED."SUPER POOP");
                         }
                         elseif($event->getItem()->getDamage()==6)
                         {
-                            $player->sendTip(TE::BOLD.TE::RED."JUST POOP");
+                            $player->sendTip(TE::BOLD.TE::RED."POOP");
                         }
                         elseif($event->getItem()->getDamage()==5)
                         {
-                            $player->sendTip(TE::BOLD.TE::GREEN."OK THATS FINE");
+                            $player->sendTip(TE::BOLD.TE::GREEN."OK");
                         }
                         elseif($event->getItem()->getDamage()==13)
                         {
-                            $player->sendTip(TE::BOLD.TE::DARK_GREEN."GOOD I DO LIKE IT");
+                            $player->sendTip(TE::BOLD.TE::DARK_GREEN."GOOD");
                         }
                         elseif($event->getItem()->getDamage()==11)
                         {
-                            $player->sendTip(TE::BOLD.TE::DARK_PURPLE."THIS IS VERY GOOD RECOMMENED");
+                            $player->sendTip(TE::BOLD.TE::DARK_PURPLE."EPIC");
                         }
                         elseif($event->getItem()->getDamage()==4)
                         {
-                            $player->sendTip(TE::BOLD.TE::GOLD."NOW THIS SHOULD BE ON THE SERVER");
+                            $player->sendTip(TE::BOLD.TE::GOLD."LEGENDARY");
                         }
                     }
                     else
                     {
-                        $player->sendTip(TE::BOLD.TE::RED."You cant vote your own Plot Silly.");
+                        $player->sendTip(TE::BOLD.TE::RED."You cant vote your own Plot");
                     }
                 }
             }
@@ -302,24 +252,24 @@ class BB extends PluginBase implements Listener {
         
         public function getConfirm($damage){
             if($damage == 14){
-                return TE::DARK_RED."SHAME TO MY EYES";
+                return TE::DARK_RED."SUPER POOP";
             }
             if($damage == 6){
-                return TE::RED."JUST POOP";
+                return TE::RED."POOP";
             }
             if($damage == 5){
-                return TE::GREEN."OK THATS FINE";
+                return TE::GREEN."OK";
             }
             if($damage == 13){
-                return TE::DARK_GREEN."GOOD I DO LIKE IT";
+                return TE::DARK_GREEN."GOOD";
             }
             if($damage == 11){
-                return TE::DARK_PURPLE."THIS IS VERY GOOD RECOMMENDED";
+                return TE::DARK_PURPLE."EPIC";
             }
             if($damage == 4){
-                return TE::GOLD."THIS SHOULD BE ON THE SERVER";
+                return TE::GOLD."LEGENDARY";
             }
-            return TE::DARK_RED."SHAME TO MY EYES";
+            return TE::DARK_RED."SUPER POOP";
         }
         
         public function onMov(PlayerMoveEvent $event)
@@ -412,7 +362,7 @@ class BB extends PluginBase implements Listener {
                                             array_push($this->arenas,$args[0]);
                                             $this->currentLevel = $args[0];
                                             $this->mode = 1;
-                                            $player->sendMessage($this->prefix . "Please start putting the spawns! Make sure it is in the middle.");
+                                            $player->sendMessage($this->prefix . "Registra los plot!");
                                             $player->setGamemode(1);
                                             array_push($this->op, $player->getName());
                                             $player->teleport($this->getServer()->getLevelByName($args[0])->getSafeSpawn(),0,0);
@@ -426,12 +376,6 @@ class BB extends PluginBase implements Listener {
                                 }
                             }
 			return true;
-			case 'bbnpc':
-                                    if ($player->isOp()) {
-                                        $npc = new EntityManager($this);
-                                        $npc->setEntity($player);
-                                    }
-                                return true;
 	}
         }
         
@@ -456,7 +400,7 @@ class BB extends PluginBase implements Listener {
 				$this->refreshArenas();
 				$this->currentLevel = "";
 				$this->mode = 0;
-				$player->sendMessage($this->prefix . "Arena Sucess!");
+				$player->sendMessage($this->prefix . "Arena Registered!");
                                 array_shift($this->op);
 			}
 			else
@@ -482,11 +426,10 @@ class BB extends PluginBase implements Listener {
                                                 goto sinslots;
                                                 with:
                                                 $slots->save();
-						$player->getInventory()->clearAll();
-                                                $player->sendMessage($this->prefix . "You Entered A BuildBattle Match");
+                                                $player->sendMessage($this->prefix . "You Entered BuildBattle");
                                                 foreach($level->getPlayers() as $playersinarena)
                                                 {
-                                                $playersinarena->sendMessage($player->getNameTag() .TE::BLUE. " joined the game!");
+                                                $playersinarena->sendMessage($player->getNameTag() .TE::AQUA. " joined the game");
                                                 }
                                                 $spawn = new Position($thespawn[0]+0.5,$thespawn[1],$thespawn[2]+0.5,$level);
 						$level->loadChunk($spawn->getFloorX(), $spawn->getFloorZ());
@@ -501,7 +444,7 @@ class BB extends PluginBase implements Listener {
 					}
 					else
 					{
-						$player->sendMessage($this->prefix . "You cannot join!");
+						$player->sendMessage($this->prefix . "You cant join!");
 					}
 				}
 			}
@@ -590,7 +533,7 @@ class RefreshSigns extends BBTask {
 					$config = new Config($this->plugin->getDataFolder() . "/config.yml", Config::YAML);
 					if($config->get($namemap . "PlayTime")!=470)
 					{
-						$ingame = TE::DARK_PURPLE . "§7[ §cGame Running §7]";
+						$ingame = TE::DARK_PURPLE . "§7[ §cRunning §7]";
 					}
 					elseif($aop>=16)
 					{
@@ -651,7 +594,7 @@ class GameSender extends BBTask {
 								$timeToStart--;
 								foreach($playersArena as $pl)
 								{
-									$pl->sendTip(TE::BLUE."Game will start in ".TE::AQUA . $timeToStart . TE::RESET);
+									$pl->sendTip(TE::WHITE."Comenzando en ".TE::GREEN . $timeToStart . TE::RESET);
                                                                         if($timeToStart<=5)
                                                                         {
                                                                         $levelArena->addSound(new PopSound($pl));
@@ -763,13 +706,12 @@ class GameSender extends BBTask {
                                                                     $laimit = new Config($this->plugin->getDataFolder() . "/limit.yml", Config::YAML);
 									foreach($playersArena as $pl)
 									{
-                                                                            $pl->sendMessage(TE::YELLOW.">--------------SERVER NAME------------------");
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BOLD.TE::BLUE."§7Build".TE::BLUE."§7Battle");
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Theme: ".TE::BOLD.TE::AQUA. $tema);
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::AQUA."Build something to related to this");
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Any Build Caught Innaporiate will lead to ban!");
-									    $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Time ".TE::AQUA."5".TE::GREEN." minutes");
-                                                                            $pl->sendMessage(TE::YELLOW.">--------------IP SERVER.NET------------------");
+                                                                            $pl->sendMessage(TE::YELLOW.">--------------------------------");
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BOLD.TE::GREEN."§7Build".TE::LIGHT_PURPLE."§7Battle");
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::WHITE."Theme: ".TE::BOLD.TE::AQUA. $tema);
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::WHITE."Build something to related to this");
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::GREEN."Time ".TE::AQUA."5".TE::GREEN." minutes");
+                                                                            $pl->sendMessage(TE::YELLOW.">--------------------------------");
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
                                                                             {
                                                                                     $limite = $config->get($arena . "Spawn1");
@@ -923,7 +865,7 @@ class GameSender extends BBTask {
                                                                                 $tot = $pts + $puntos;
                                                                                 $points->set($config->get("actual".$arena), $tot);
                                                                                 $points->save();
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. " You Have Confirmed Vote: ".TE::BOLD.$voto);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Confirmed Vote: ".TE::BOLD.$voto);
                                                                             }
                                                                         }
                                                                     }
@@ -961,7 +903,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "The Person that have built this: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -990,7 +932,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "This Guy wants to see you vote for his build: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1019,7 +961,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "The Builder of this plot: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1048,7 +990,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Im looking at a build made by: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1077,7 +1019,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Look more noobs like this one that made this one: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1106,7 +1048,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "He wasted 5 mintues to build this: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1135,7 +1077,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "OWNER!!! OWNER!!! Owner of this plot!: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1164,7 +1106,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "He waited till his plot came and it is here presenting: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1193,7 +1135,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "A cat didnt helped him build this plot made by: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1222,7 +1164,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Instead of stalking at people builds he built his. Say hello to: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1251,7 +1193,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Instead of watching a movie he built his plot. Say hello to: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1280,7 +1222,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "He travel from Space and built his plot and made this plot. Say hi to: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1309,7 +1251,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "The owner of this plot:( : " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1338,7 +1280,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Bravo he builted this thanks: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1367,9 +1309,9 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "You wanted a good Plot Owner message but got a bad one. Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
-                                                                        } 
+                                                                        }
                                                                         else
                                                                         {
                                                                             $time = 20;
@@ -1396,7 +1338,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "PLOOOOOOOTTTTT!!! OWNNNNERRR!!!: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1418,8 +1360,15 @@ class GameSender extends BBTask {
                                                                         $max = max($values);
                                                                         $quien = array_search($max, $paints);
                                                                         $thesp = $limit->get($quien);
-                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. ">> ".TE::AQUA."BUILD BATTLE WINNERS!!! $arena ".TE::GREEN."($tema)");
-                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "1ST°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
+                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. ">> ".TE::AQUA."Winners $arena ".TE::GREEN."($tema)");
+                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "1°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
+                                                                        unset($paints[$quien]);
+                                                                        $quien2 = array_search($val[1], $paints);
+                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "2°: ".TE::AQUA.$quien2." ".TE::GREEN.$val[1]);
+                                                                        unset($paints[$quien2]);
+                                                                        $quien3 = array_search($val[2], $paints);
+                                                                        $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "3°: ".TE::AQUA.$quien3." ".TE::GREEN.$val[2]);
+                                                                        foreach($playersArena as $pl) {
                                                                             $puntaje = $points->get($pl->getName());
                                                                             $tupos = 1 + array_search($puntaje, $val);
                                                                             $rand = mt_rand(1, 2);
@@ -1432,7 +1381,7 @@ class GameSender extends BBTask {
                                                                             {
                                                                             $spawn = new Position($thesp[0]-$ra,$thesp[1]+21,$thesp[2]+0.5,$levelArena);
                                                                             }
-                                                                            $pl->sendMessage($this->prefix .TE::GREEN. "Percentage of how players rated you: ".TE::YELLOW.$tupos."°: ".TE::GREEN.$puntaje);
+                                                                            $pl->sendMessage($this->prefix .TE::GREEN. "Tu Puntaje: ".TE::YELLOW.$tupos."°: ".TE::GREEN.$puntaje);
                                                                             $pl->teleport($spawn,0,0);
                                                                         }
                                                                     }
@@ -1451,7 +1400,7 @@ class GameSender extends BBTask {
                                                                             $pl->setHealth(20);
                                                                         }
                                                                         $this->getResetmap()->reload($levelArena);
-                                                                        $config->set($arena . "Join", 0);
+                                                                        $config->set($arena . "inicio", 0);
                                                                         $config->save();
                                                                         $points = new Config($this->plugin->getDataFolder() . "/puntos".$arena.".yml", Config::YAML);
                                                                         foreach($points->getAll() as $key => $w){
@@ -1468,7 +1417,7 @@ class GameSender extends BBTask {
 						{
                                                     foreach($playersArena as $pl)
                                                     {
-                                                            $pl->sendTip(TE::YELLOW . "Need more players to begin. Please be patient!!" .TE::RESET);
+                                                            $pl->sendTip(TE::YELLOW . "Need more players" .TE::RESET);
                                                     }
                                                     $config->set($arena . "PlayTime", 470);
                                                     $config->set($arena . "StartTime", 30);
