@@ -26,6 +26,7 @@ use pocketmine\level\sound\PopSound;
 use pocketmine\level\sound\AnvilUseSound;
 use pocketmine\item\Item;
 use pocketmine\event\entity\EntityLevelChangeEvent;
+use onebone\economyapi\EconomyAPI;
 
 class BB extends PluginBase implements Listener {
 
@@ -1370,6 +1371,10 @@ class GameSender extends BBTask {
                                                                         $thesp = $limit->get($quien);
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. ">> ".TE::AQUA."BUILD BATTLE WINNERS!!! $arena ".TE::GREEN."($tema)");
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "1ST°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
+									if(!empty($this->plugin->api))
+                                                                             {
+                                                                             $this->plugin->api->addMoney($quien,150);
+                                                                             }
                                                                         foreach($playersArena as $pl) {
                                                                             $puntaje = $points->get($pl->getName());
                                                                             $tupos = 1 + array_search($puntaje, $val);
