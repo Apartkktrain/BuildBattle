@@ -40,6 +40,7 @@ class BB extends PluginBase implements Listener {
 	{
 		$this->getLogger()->notice(TE::AQUA . "BuildBattle by WEATHERCRAFTYT1 ;)");
                 $this->getServer()->getPluginManager()->registerEvents($this ,$this);
+		$this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
 		@mkdir($this->getDataFolder());
 		$config = new Config($this->getDataFolder() . "/config.yml", Config::YAML);
 		if($config->get("arenas")!=null)
@@ -714,13 +715,13 @@ class GameSender extends BBTask {
                                                                     $laimit = new Config($this->plugin->getDataFolder() . "/limit.yml", Config::YAML);
 									foreach($playersArena as $pl)
 									{
-                                                                            $pl->sendMessage(TE::YELLOW.">--------------SERVER NAME------------------");
+                                                                            $pl->sendMessage(TE::YELLOW.">--------------WC SERVER------------------");
                                                                             $pl->sendMessage(TE::YELLOW."> ".TE::BOLD.TE::BLUE."§7Build".TE::BLUE."§7Battle");
                                                                             $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Theme: ".TE::BOLD.TE::AQUA. $tema);
                                                                             $pl->sendMessage(TE::YELLOW."> ".TE::AQUA."Build something to related to this");
                                                                             $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Any Build Caught Innaporiate will lead to ban!");
 									    $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Time ".TE::AQUA."5".TE::GREEN." minutes");
-                                                                            $pl->sendMessage(TE::YELLOW.">--------------IP SERVER.NET------------------");
+                                                                            $pl->sendMessage(TE::YELLOW.">--------------§bplaywcserver.ddns.net§e------------------");
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
                                                                             {
                                                                                     $limite = $config->get($arena . "Spawn1");
@@ -1371,6 +1372,11 @@ class GameSender extends BBTask {
                                                                         $thesp = $limit->get($quien);
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. ">> ".TE::AQUA."BUILD BATTLE WINNERS!!! $arena ".TE::GREEN."($tema)");
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "1ST°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
+			                                                    $pl->sendMessage(TE::YELLOW.">--------------WC SERVER------------------");
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BOLD.TE::BLUE."Rewards!");
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::AQUA."The Winner:".TE::AQUA.$quien);
+                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::AQUA."Winner got §d+150 §bfor winning" );		    
+                                                                            $pl->sendMessage(TE::YELLOW.">--------------§bplaywcserver.ddns.net§e------------------");
 									if(!empty($this->plugin->api))
                                                                              {
                                                                              $this->plugin->api->addMoney($quien,150);
