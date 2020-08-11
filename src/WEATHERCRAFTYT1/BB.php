@@ -448,7 +448,6 @@ class BB extends PluginBase implements Listener {
                                                 $player->setMaxHealth(20);
                                                 $player->setHealth(20);
                                                 $player->setFood(20);
-                                                $player->setGamemode(1);
                                                 sinslots:
 					}
 					else
@@ -722,6 +721,7 @@ class GameSender extends BBTask {
                                                                             $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Any Build Caught Innaporiate will lead to ban!");
 									    $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Time ".TE::AQUA."5".TE::GREEN." minutes");
                                                                             $pl->sendMessage(TE::YELLOW.">--------------§bplaywcserver.ddns.net§e------------------");
+							                    $pl->setGamemode(1);
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
                                                                             {
                                                                                     $limite = $config->get($arena . "Spawn1");
