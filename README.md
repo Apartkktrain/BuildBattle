@@ -19,7 +19,7 @@ You are free to make suggestions to this plugin
 
 ## Setup
 
-- To make a new arena do /bb make <arena> 
+- To make a new arena do /bb <arena> 
 - We recommend using this map https://www.mediafire.com/file/vkki8vsaf9d54kf/BuildBattle-Map.zip/file.
 - Tap All The Middle Parts of the arena (16 Spawns) 
 - After you tap 16 Spawns you put the waiting lobby and you are done
