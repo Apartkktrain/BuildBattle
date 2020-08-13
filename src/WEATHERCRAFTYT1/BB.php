@@ -738,13 +738,12 @@ class GameSender extends BBTask {
                                                                     $laimit = new Config($this->plugin->getDataFolder() . "/limit.yml", Config::YAML);
 									foreach($playersArena as $pl)
 									{
-                                                                            $pl->sendMessage(TE::YELLOW.">--------------WC SERVER------------------");
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BOLD.TE::BLUE."§7Build".TE::BLUE."§7Battle");
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Theme: ".TE::BOLD.TE::AQUA. $tema);
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::AQUA."Build something to related to this");
-                                                                            $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Any Build Caught Innaporiate will lead to ban!");
+                                                                            $pl->sendMessage(TE::BOLD.TE::GREEN.">--------------------------------------------------------------------------------");
+                                                                            $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::YELLOW."Build something relevant to the theme: ".TE::BOLD.TE::AQUA. $tema);
+                                                                            $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::YELLOW."When the timer ends you can");
+                                                                            $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::BLUE."vote of the build you like the best!");
 									    $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Time ".TE::AQUA."5".TE::GREEN." minutes");
-                                                                            $pl->sendMessage(TE::YELLOW.">--------------§bplaywcserver.ddns.net§e------------------");
+                                                                            $pl->sendMessage(TE::BOLD.TE::GREEN.">--------------§bplaywcserver.ddns.net§a-----------------------------------------");
 							                    $pl->setGamemode(1);
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
                                                                             {
