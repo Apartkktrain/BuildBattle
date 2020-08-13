@@ -643,16 +643,25 @@ class GameSender extends BBTask {
                                                                 {
                                                                     $levelArena->setTime(7000);
                                                                     $levelArena->stopTime();
+								    $api = $this->score;
+                                                                            $api->remove($pl);
 								    $api = $this->plugin->score;
                                                                     $api->new($pl, $pl->getName(), TE::BOLD.TE::BLUE."[Build".TE::BOLD.TE::BLUE."Battle]");
                                                                     $i = 0;
                                                                     $lines = [
-                                                                    TE::WHITE."   ",
-                                                                    TE::BLUE."Starting in: ".TE::AQUA.$time,
+                                                                    TE::WHITE."   ", 
+                                                                    TE::BLUE."Starting in: ".TE::AQUA.$timeToStart,
                                                                     TE::WHITE."   ",
                                                                     TE::BLUE."Mode: §bSolo",
                                                                     TE::WHITE."    ",
                                                                     TE::BLUE."playwcserver.ddns.net ",
+							            ];
+                                                                    foreach($lines as $line){
+                                                                             if($i < 15){
+                                                                             $i++;
+                                                                   	 $api->setLine($pla, $i, $line);
+                                                                            }
+                                                                    }
                                                                 }
 								if($timeToStart==10)
 								{
@@ -677,6 +686,8 @@ class GameSender extends BBTask {
 								if($timeToStart==1)
 								{
                                                                    $pl->broadcastMessage(TE::RED."1\n§ePrepare to build");
+								   $api = $this->score;
+                                                                           $api->remove($pl);
 								}
 								if($timeToStart<=0)
 								{
@@ -782,26 +793,25 @@ class GameSender extends BBTask {
 									    $api = $this->score;
                                                                                     $api->remove($pl);
 									    $api = $this->plugin->score;
-                                                                            $api->new($pla, $pla->getName(), TE::BOLD.TE::BLUE."[Run".TE::BOLD.TE::BLUE." Of The".TE::BOLD.TE::BLUE." Beast]");
+                                                                            $api->new($pl, $pl->getName(), TE::BOLD.TE::BLUE."[Build".TE::BOLD.TE::BLUE."Battle");
                                                                             $i = 0;
                                                                             $lines = [
                                                                             TE::WHITE."   ",
-                                                                            TE::BLUE."Beasts: ".TE::AQUA.$bestia,
-                                                                            TE::WHITE."   ",
-                                                                            TE::BLUE."Runner: ".TE::AQUA.$corredor,
-                                                                            TE::WHITE."   ",
-                                                                            TE::BLUE."Distance: ".TE::AQUA.$dist,
-                                                                            TE::WHITE."    ",
                                                                             TE::BLUE."Time: ".TE::AQUA.$time,
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."Theme:",
+                                                                            TE::AQUA. $tema,
+									    TE::WHITE."   ",
+                                                                            TE::BLUE."Mode: ".TE::AQUA."Solo",
                                                                             TE::WHITE."   ",
                                                                             TE::BLUE."playwcserver.ddns.net ",
                                                                             ];
                                                                             foreach($lines as $line){
                                                                         	    if($i < 15){
-                                                                                  	$i++;
-                                                                   	          $api->setLine($pla, $i, $line);
-                                                                        	}
-                                                                        }
+                                                                                    $i++;
+                                                                   	        $api->setLine($pla, $i, $line);
+                                                                        	   }
+                                                                            }
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
                                                                             {
                                                                                     $limite = $config->get($arena . "Spawn1");
@@ -898,7 +908,7 @@ class GameSender extends BBTask {
                                                                             {
                                                                                     $pl->sendMessage($this->prefix .TE::GREEN. "Next " .TE::YELLOW. "5" .TE::GREEN. " seconds");
                                                                                     $levelArena->addSound(new PopSound($pl));
-                                                                            }
+                                                                            } 
                                                                     }
                                                                     elseif($time == 165 || $time == 155 || $time == 145 || $time ==135 || $time ==125 || $time ==115 || $time ==105 || $time ==95 || $time ==85 || $time ==75 || $time ==65 || $time ==55 || $time ==45 || $time ==35 || $time ==25)
                                                                     {
@@ -973,6 +983,26 @@ class GameSender extends BBTask {
                                                                             $pl->getInventory()->setItem(5,Item::get(159,4,1));
                                                                             $points->set($pl->getName(), 0);
                                                                             $points->save();
+									    $api = $this->score;
+                                                                                    $api->remove($pl);
+								            $api = $this->plugin->score;
+                                                                            $api->new($pl, $pl->getName(), TE::BOLD.TE::BLUE."[Build".TE::BOLD.TE::BLUE."Battle]");
+                                                                            $i = 0;
+                                                                            $lines = [
+								            TE::BLUE."Theme: ".TE::AQUA.$tema,
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."Your Vote: ".TE::AQUA.$voto,
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."Mode: §bSolo",
+                                                                            TE::WHITE."    ",
+                                                                            TE::BLUE."playwcserver.ddns.net ",
+									    ];
+                                                                            foreach($lines as $line){
+                                                                        	    if($i < 15){
+                                                                        	    $i++;
+                                                                   	        $api->setLine($pl, $i, $line);
+                                                                        	   }
+                                                                            }
                                                                         }
                                                                         if($slots->get("slot1".$arena)!=null)
                                                                         {
