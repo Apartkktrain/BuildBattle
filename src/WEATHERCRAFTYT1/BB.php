@@ -458,9 +458,7 @@ class BB extends PluginBase implements Listener {
                                                 $i = 0;
                                                 $lines = [
                                                 TE::WHITE."   ",
-                                                TE::BLUE."Players: §bDisabled",
-                                                TE::WHITE."   ",
-                                                TE::BLUE."Starting in: ".TE::AQUA.$timeToStart,
+                                                TE::BLUE."Watiting",
                                                 TE::WHITE."   ",
                                                 TE::BLUE."Mode: §bSolo",
                                                 TE::WHITE."    ",
@@ -645,6 +643,16 @@ class GameSender extends BBTask {
                                                                 {
                                                                     $levelArena->setTime(7000);
                                                                     $levelArena->stopTime();
+								    $api = $this->plugin->score;
+                                                                    $api->new($pl, $pl->getName(), TE::BOLD.TE::BLUE."[Build".TE::BOLD.TE::BLUE."Battle]");
+                                                                    $i = 0;
+                                                                    $lines = [
+                                                                    TE::WHITE."   ",
+                                                                    TE::BLUE."Starting in: ".TE::AQUA.$time,
+                                                                    TE::WHITE."   ",
+                                                                    TE::BLUE."Mode: §bSolo",
+                                                                    TE::WHITE."    ",
+                                                                    TE::BLUE."playwcserver.ddns.net ",
                                                                 }
 								if($timeToStart==10)
 								{
@@ -767,7 +775,7 @@ class GameSender extends BBTask {
                                                                             $pl->sendMessage(TE::BOLD.TE::GREEN.">--------------------------------------------------------------------------------");
                                                                             $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::YELLOW."Build something relevant to the theme: ".TE::BOLD.TE::AQUA. $tema);
                                                                             $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::YELLOW."When the timer ends you can");
-                                                                            $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::BLUE."vote of the build you like the best!");
+                                                                            $pl->sendMessage(TE::BOLD.TE::YELLOW."> ".TE::YELLOW."vote of the build you like the best!");
 									    $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Time ".TE::AQUA."5".TE::GREEN." minutes");
                                                                             $pl->sendMessage(TE::BOLD.TE::GREEN.">--------------§bplaywcserver.ddns.net§a-----------------------------------------");
 							                    $pl->setGamemode(1);
