@@ -22,6 +22,7 @@ use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\entity\EntityInventoryChangeEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
 use WEATHERCRAFTYT1\ResetMap;
+use WEATHERCRAFTYT1\API\ScoreAPI;
 use pocketmine\level\sound\PopSound;
 use pocketmine\level\sound\AnvilUseSound;
 use pocketmine\item\Item;
@@ -35,6 +36,7 @@ class BB extends PluginBase implements Listener {
 	public $arenas = array();
 	public $currentLevel = "";
         public $op = array();
+	public $score;
 	
 	public function onEnable()
 	{
@@ -59,6 +61,7 @@ class BB extends PluginBase implements Listener {
 		$config->save();
                 $slots = new Config($this->getDataFolder() . "/slots.yml", Config::YAML);
                 $slots->save();
+		$this->score = new ScoreAPI($this);
 		$this->getScheduler()->scheduleRepeatingTask(new GameSender($this), 20);
 		$this->getScheduler()->scheduleRepeatingTask(new RefreshSigns($this), 20);
 	}
@@ -113,6 +116,8 @@ class BB extends PluginBase implements Listener {
                 $pl->removeAllEffects();
                 $pl->getInventory()->clearAll();
                 $pl->setGamemode(0);
+		$api = $this->score;
+                    $api->remove($pl);
                 $slots = new Config($this->getDataFolder() . "/slots.yml", Config::YAML);
                 $limit = new Config($this->getDataFolder() . "/limit.yml", Config::YAML);
                 $limit->set($pl->getName(), 0);
@@ -175,6 +180,8 @@ class BB extends PluginBase implements Listener {
                 $pl->getInventory()->clearAll();
                 $pl->setGamemode(0);
                 $pl->setNameTag($pl->getName());
+		$api = $this->score;
+                    $api->remove($pl);   
                 $slots = new Config($this->getDataFolder() . "/slots.yml", Config::YAML);
                 for ($i = 1; $i <= 16; $i++) {
                     if($slots->get("slot".$i.$level)==$pl->getName())
