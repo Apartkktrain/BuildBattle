@@ -1540,7 +1540,7 @@ class GameSender extends BBTask {
                                                                             $pl->setFood(20);
                                                                             $pl->setHealth(20);
 									    $api = $this->score;
-                                                                                $api->remove($pl)
+                                                                                $api->remove($pl);
                                                                         }
                                                                         $this->getResetmap()->reload($levelArena);
                                                                         $config->set($arena . "Join", 0);
