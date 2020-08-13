@@ -453,6 +453,25 @@ class BB extends PluginBase implements Listener {
 						$player->getInventory()->clearAll();
                                                 $player->removeAllEffects();
                                                 $player->setMaxHealth(20);
+						$api = $this->plugin->score;
+                                                $api->new($player, $player->getName(), TE::BOLD.TE::BLUE."[Build".TE::BOLD.TE::BLUE."Battle]");
+                                                $i = 0;
+                                                $lines = [
+                                                TE::WHITE."   ",
+                                                TE::BLUE."Players: §bDisabled",
+                                                TE::WHITE."   ",
+                                                TE::BLUE."Starting in: ".TE::AQUA.$timeToStart,
+                                                TE::WHITE."   ",
+                                                TE::BLUE."Mode: §bSolo",
+                                                TE::WHITE."    ",
+                                                TE::BLUE."playwcserver.ddns.net ",
+                                                ];
+                                                foreach($lines as $line){
+                                                        if($i < 15){
+                                                           $i++;
+                                                        $api->setLine($pla, $i, $line);
+                                                           }
+                                                }
                                                 $player->setHealth(20);
                                                 $player->setFood(20);
                                                 sinslots:
@@ -752,6 +771,29 @@ class GameSender extends BBTask {
 									    $pl->sendMessage(TE::YELLOW."> ".TE::BLUE."Time ".TE::AQUA."5".TE::GREEN." minutes");
                                                                             $pl->sendMessage(TE::BOLD.TE::GREEN.">--------------§bplaywcserver.ddns.net§a-----------------------------------------");
 							                    $pl->setGamemode(1);
+									    $api = $this->score;
+                                                                                    $api->remove($pl);
+									    $api = $this->plugin->score;
+                                                                            $api->new($pla, $pla->getName(), TE::BOLD.TE::BLUE."[Run".TE::BOLD.TE::BLUE." Of The".TE::BOLD.TE::BLUE." Beast]");
+                                                                            $i = 0;
+                                                                            $lines = [
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."Beasts: ".TE::AQUA.$bestia,
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."Runner: ".TE::AQUA.$corredor,
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."Distance: ".TE::AQUA.$dist,
+                                                                            TE::WHITE."    ",
+                                                                            TE::BLUE."Time: ".TE::AQUA.$time,
+                                                                            TE::WHITE."   ",
+                                                                            TE::BLUE."playwcserver.ddns.net ",
+                                                                            ];
+                                                                            foreach($lines as $line){
+                                                                        	    if($i < 15){
+                                                                                  	$i++;
+                                                                   	          $api->setLine($pla, $i, $line);
+                                                                        	}
+                                                                        }
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
                                                                             {
                                                                                     $limite = $config->get($arena . "Spawn1");
