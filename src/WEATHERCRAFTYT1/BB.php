@@ -467,7 +467,7 @@ class BB extends PluginBase implements Listener {
                                                 foreach($lines as $line){
                                                         if($i < 15){
                                                            $i++;
-                                                        $api->setLine($pla, $i, $line);
+                                                        $api->setLine($player, $i, $line);
                                                            }
                                                 }
                                                 $player->setHealth(20);
@@ -659,7 +659,7 @@ class GameSender extends BBTask {
                                                                     foreach($lines as $line){
                                                                              if($i < 15){
                                                                              $i++;
-                                                                   	 $api->setLine($pla, $i, $line);
+                                                                   	 $api->setLine($pl, $i, $line);
                                                                             }
                                                                     }
                                                                 }
@@ -809,7 +809,7 @@ class GameSender extends BBTask {
                                                                             foreach($lines as $line){
                                                                         	    if($i < 15){
                                                                                     $i++;
-                                                                   	        $api->setLine($pla, $i, $line);
+                                                                   	        $api->setLine($pl, $i, $line);
                                                                         	   }
                                                                             }
                                                                             if($slots->get("slot1".$arena)==$pl->getName())
@@ -1226,7 +1226,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
