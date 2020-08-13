@@ -1400,7 +1400,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Bravo he builted this thanks: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1485,6 +1485,26 @@ class GameSender extends BBTask {
                                                                         $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "1ST°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
 			                                                $this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "Reward for the winner°: ".TE::AQUA.$quien." ".TE::GREEN.$max);
 									$this->plugin->getServer()->broadcastMessage($this->prefix .TE::YELLOW. "-----------------------------------------------");
+									$api = $this->score;
+                                                                                $api->remove($pl);
+								        $api = $this->plugin->score;
+                                                                        $api->new($pl, $pl->getName(), TE::BOLD.TE::BLUE."[Build".TE::BOLD.TE::BLUE."Battle]");
+                                                                        $i = 0;
+                                                                        $lines = [
+								        TE::BLUE."Theme: ".TE::AQUA.$tema,
+                                                                        TE::WHITE."   ",
+                                                                        TE::BLUE."Winner: ".TE::AQUA.$quien,
+                                                                        TE::WHITE."   ",
+                                                                        TE::BLUE."Mode: §bSolo",
+                                                                        TE::WHITE."    ",
+                                                                        TE::BLUE."playwcserver.ddns.net ",
+								        ];
+                                                                        foreach($lines as $line){
+                                                                                if($i < 15){
+                                                                                $i++;
+                                                                   	     $api->setLine($pl, $i, $line);
+                                                                        	}
+                                                                        }
 									if(!empty($this->plugin->api))
                                                                              {
                                                                              $this->plugin->api->addMoney($quien,150);
@@ -1519,6 +1539,8 @@ class GameSender extends BBTask {
                                                                             $pl->removeAllEffects();
                                                                             $pl->setFood(20);
                                                                             $pl->setHealth(20);
+									    $api = $this->score;
+                                                                                $api->remove($pl)
                                                                         }
                                                                         $this->getResetmap()->reload($levelArena);
                                                                         $config->set($arena . "Join", 0);
