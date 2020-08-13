@@ -620,6 +620,30 @@ class GameSender extends BBTask {
                                                                     $levelArena->setTime(7000);
                                                                     $levelArena->stopTime();
                                                                 }
+								if($timeToStart==10)
+								{
+                                                                   $pl->broadcastMessage(TE::RED."10\n§ePrepare to build");
+								}
+                                                                if($timeToStart==5)
+								{
+                                                                   $pl->broadcastMessage(TE::RED."5\n§ePrepare to build");
+								}
+                                                                if($timeToStart==4)
+								{
+                                                                   $pl->broadcastMessage(TE::RED."4\n§ePrepare to build");
+								}
+								if($timeToStart==3)
+								{
+                                                                   $pl->broadcastMessage(TE::RED."3\n§ePrepare to build");
+								}
+								if($timeToStart==2)
+								{
+                                                                   $pl->broadcastMessage(TE::RED."2\n§ePrepare to build");
+								}
+								if($timeToStart==1)
+								{
+                                                                   $pl->broadcastMessage(TE::RED."1\n§ePrepare to build");
+								}
 								if($timeToStart<=0)
 								{
                                                                     foreach($playersArena as $pla)
@@ -913,7 +937,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "The Person that have built this: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -942,7 +966,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "This Guy wants to see you vote for his build: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -971,7 +995,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "The Builder of this plot: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1000,7 +1024,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Im looking at a build made by: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1029,7 +1053,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Look more noobs like this one that made this one: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1058,7 +1082,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "He wasted 5 mintues to build this: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1087,7 +1111,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "OWNER!!! OWNER!!! Owner of this plot!: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder!: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1116,7 +1140,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "He waited till his plot came and it is here presenting: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1145,7 +1169,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "A cat didnt helped him build this plot made by: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1174,7 +1198,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Instead of stalking at people builds he built his. Say hello to: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1203,7 +1227,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Instead of watching a movie he built his plot. Say hello to: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1232,7 +1256,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "He travel from Space and built his plot and made this plot. Say hi to: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1261,7 +1285,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "The owner of this plot:( : " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
@@ -1319,7 +1343,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "You wanted a good Plot Owner message but got a bad one. Plot Owner: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         } 
                                                                         else
@@ -1348,7 +1372,7 @@ class GameSender extends BBTask {
                                                                                 }
                                                                                 $pl->teleport($spawn,0,0);
                                                                                 $pl->sendMessage($this->prefix .TE::AQUA.$tema);
-                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "PLOOOOOOOTTTTT!!! OWNNNNERRR!!!: " .TE::WHITE. TE::AQUA. $actual);
+                                                                                $pl->sendMessage($this->prefix .TE::YELLOW. "Builder: " .TE::WHITE. TE::AQUA. $actual);
                                                                             }
                                                                         }
                                                                         else
