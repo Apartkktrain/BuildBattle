@@ -18,7 +18,7 @@ class ScoreAPI {
 	private $scoreboards = [];
 	private $plugin;
 	
-	public function __construct(EDLB $plugin){
+	public function __construct(BB $plugin){
 		$this->plugin = $plugin;
 	}
 	
